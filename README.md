@@ -77,3 +77,17 @@ import { MaterialModule } from './material.module';
 })
 export class AppModule { }
 ```
+
+## Set a loading message
+
+As long as the main AppComponent is not loaded, we display the message ‚Loading Application‘ on the screen. Also, we add the Material Background globally to our output.
+
+```html
+<body class="mat-typography mat-app-background">
+  <app-root>
+    <div class="app-loader">
+      Loading Application
+    </div>
+  </app-root>
+</body>
+```
