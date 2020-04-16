@@ -91,3 +91,30 @@ As long as the main AppComponent is not loaded, we display the message ‚Loadin
   </app-root>
 </body>
 ```
+
+## Add global styling
+
+The styles.scss is just a basic reset. Also we center the loading message on the screen:
+
+`/src/styles.scss`
+```scss
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.app-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+```
