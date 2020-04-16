@@ -37,13 +37,15 @@ $ ng add @angular/material
 
 ### Add a module for Material
 
-Because we need to import every module for its own, it can bloat up the AppModule pretty fast. Therefore we manage the imports for Angular Material in a separate module.
+Because we need to import every module for its own, it can bloat up the `AppModule` pretty fast. Therefore we manage the imports for Angular Material in a separate module.
 
-The --flat flag creates the module in the /src/app folder, instead of creating a subfolder for just one file.
+The --flat flag creates the module in the `/src/app` folder, instead of creating a subfolder for just one file.
 
 ```bsh
 $ ng g m material –flat
 ```
+
+We declare the first modules, that we need in the next step.
 
 `/src/app/material.module.ts`
 ```typescript
@@ -63,7 +65,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 export class MaterialModule { }
 ```
 
-Next, we need to import this module in our AppModule
+Next, we need to import this module in our `AppModule`
 
 `/src/app/app.module.ts`
 ```typescript
@@ -80,7 +82,7 @@ export class AppModule { }
 
 ## Set a loading message
 
-As long as the main AppComponent is not loaded, we display the message ‚Loading Application‘ on the screen. Also, we add the Material Background globally to our output.
+As long as the main `AppComponent` is not loaded, we display the message ‚Loading Application‘ on the screen. Also, we add the Material Background globally to our output.
 
 ```html
 <body class="mat-typography mat-app-background">
@@ -121,7 +123,7 @@ body {
 
 ## Implement the basic layout
 
-Our basic layout consists of a left sidebar, a topbar for the headline, main content and a static footer. The sidebar can be toggled on handheld devices. Also the sidebar should close on those devices on route change.
+Our basic layout consists of a left sidebar, a topbar for the headline and the main content. The sidebar can be toggled on handheld devices. Also the sidebar should close on those devices on route change.
 
 `/src/app/app.component.ts`
 ```typescript
@@ -166,7 +168,7 @@ export class AppComponent {
 
 ## The main template
 
-It‘s pretty straightforward. The mat-sidenav is either fixed or as pop-over, depending on the device witdh. We will replace the Navigation and the Headlines soon.
+It‘s pretty straightforward. The `mat-sidenav` is either fixed or as pop-over, depending on the device witdh. We will replace the Navigation and the Headlines soon.
 
 `/src/app/app.comonent.html`
 ```html
