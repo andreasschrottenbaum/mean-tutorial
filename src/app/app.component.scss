@@ -1,0 +1,26 @@
+.mat-sidenav-container {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+main {
+  padding: 1em;
+
+  display: flex;
+  height: calc(100vh - 56px - 1em);
+}
+
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: inherit;
+
+  .description {
+    font-weight: lighter;
+    font-size: 70%;
+  }
+}
+
+.mat-sidenav {
+  width: 15em;
+}

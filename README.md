@@ -118,3 +118,118 @@ body {
   align-items: center;
 }
 ```
+
+## Implement the basic layout
+
+Our basic layout consists of a left sidebar, a topbar for the headline, main content and a static footer. The sidebar can be toggled on handheld devices. Also the sidebar should close on those devices on route change.
+
+`/src/app/app.component.ts`
+```typescript
+import { Component, ViewChild } from '@angular/core';
+
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Router, Event, NavigationEnd } from '@angular/router';
+
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  @ViewChild('drawer') drawer;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
+  ) {
+    // Close the navigation drawer on handsets after router change
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if (window.matchMedia(Breakpoints.Handset).matches) {
+          this.drawer.close();
+        }
+      }
+    });
+  }
+
+  // copy/pasted from angular.io
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+}
+```
+
+## The main template
+
+It‘s pretty straightforward. The mat-sidenav is either fixed or as pop-over, depending on the device witdh. We will replace the Navigation and the Headlines soon.
+
+`/src/app/app.comonent.html`
+```html
+<mat-sidenav-container>
+  <mat-sidenav
+    #drawer
+    fixedInViewport
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    Navigation comes here
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div>
+        <div>Headline</div>
+        <div class="description">Description</div>
+      </div>
+    </mat-toolbar>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+```
+
+## The main app styling
+
+Most of the styling and positioning is done from Angular Material. We just set the content to full width and height, and add some slight adjustments to the toolbar and the side navigation.
+
+`/src/app/app.component.scss`
+```scss
+.mat-sidenav-container {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+main {
+  padding: 1em;
+
+  display: flex;
+  height: calc(100vh - 56px - 1em);
+}
+
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: inherit;
+
+  .description {
+    font-weight: lighter;
+    font-size: 70%;
+  }
+}
+
+.mat-sidenav {
+  width: 15em;
+}
+```
+
+Now, the very basic structure of our app is finished. Wasn‘t that hard, don‘t you think?
