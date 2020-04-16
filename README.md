@@ -84,6 +84,7 @@ export class AppModule { }
 
 As long as the main `AppComponent` is not loaded, we display the message ‚Loading Application‘ on the screen. Also, we add the Material Background globally to our output.
 
+`/src/index.html`
 ```html
 <body class="mat-typography mat-app-background">
   <app-root>
