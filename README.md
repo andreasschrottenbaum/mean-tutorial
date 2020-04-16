@@ -25,3 +25,12 @@ Answer the questions as follows:
 
 - Would you like to add Angluar routing? YES
 - Which stylesheet format would you like to use? SCSS
+
+### Add Angular Material
+We add Angular Material for an easier structuring and styling of our HTML markup.
+```bsh
+$ ng add @angular/material
+```
+- Choose your preferred theme
+- Set up global Angular Material typography styles? YES
+- Set up browser animations for Angular Material? YES
