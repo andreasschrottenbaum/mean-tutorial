@@ -404,3 +404,28 @@ export interface User {
   token: string;
 }
 ```
+
+Also, we will need another component, just for checking the login and have a redirect
+
+```bsh
+$ ng g c dashboard
+```
+
+And the correlating route `/`
+
+`/src/app/app-routing.module.ts`
+
+```typescript
+...
+import { DashboardComponent } from './dashboard/dashboard.component';
+
+const routes: Routes = [
+  ...
+  {
+    path: '',
+    component: DashboardComponent
+  }
+];
+...
+```
+
