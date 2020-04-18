@@ -316,7 +316,7 @@ export class LoginComponent implements OnInit {
 }
 ```
 
-In the next step, we use `<mat-form-field>`. We need to import it in the `MaterialModule`.
+In the next step, we use `<mat-form-field>`, we need to import it in the `MaterialModule`.
 
 > Throughout this tutorial, we will need several modules. For keeping it simple, I will skip this step for every new module, so here is the final `MaterialModule`, we will have at the end:
 
@@ -353,4 +353,25 @@ import { MatDialogModule } from '@angular/material/dialog';
   ]
 })
 export class MaterialModule { }
+```
+
+The markup is pretty straightforward. We will look into the features of the `FormBuilder` in a short while.
+
+```html
+<form [formGroup]="loginForm" class="loginForm">
+  <p>
+    <mat-form-field>
+      <input matInput type="email" formControlName="email" placeholder="E-Mail">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <input matInput type="password" formControlName="password" placeholder="Passwort">
+    </mat-form-field>
+  </p>
+
+  <button mat-raised-button [disabled]="!loginForm.valid" color="primary">
+    Login
+  </button>
+</form>
 ```
