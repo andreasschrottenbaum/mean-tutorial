@@ -267,3 +267,22 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 ```
+
+We use the `FormBuilder` for all forms in our project, so we need to add the `ReactiveFormsModule` to the `/src/app/app.module.ts`
+
+`/src/app/app.module.ts`
+
+```typescript
+...
+import { ReactiveFormsModule } from '@angular/forms';
+
+@NgModule({
+  ...
+  imports: [
+    ...
+    ReactiveFormsModule
+  ],
+  ...
+})
+export class AppModule { }
+```
