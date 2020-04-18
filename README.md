@@ -531,3 +531,30 @@ To access it, we can use the `submit` call of our form. So, we need to update ou
 +   Login
 + </button>
 ```
+
+We also add the `AuthService` to the `DashboardComponent` to add a greeting and a logout button, if the user is logged in.
+
+If no user is logged in, we show a link to the login page.
+
+`/src/app/dashboard/dashboard.component.ts`
+
+```diff
++ import { AuthService } from '../shared/services/auth.service';
+
+- constructor() { }
++ constructor(
++   public auth: AuthService
++ ) { }
+```
+
+`/src/app/dashboard/dashboard.component.html`
+
+```html
+<div *ngIf="auth.user">
+  <h3>Hello, {{ auth.user.name }}</h3>
+
+  <button (click)="auth.logout()">Logout</button>
+</div>
+
+<a [routerLink]="['/login']" *ngIf="!auth.user">Login</a>
+```
