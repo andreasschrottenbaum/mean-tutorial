@@ -386,3 +386,21 @@ We generate it as used with the `ng` command and place the service in the `/src/
 $ ng g s shared/services/auth
 ```
 
+We also generate an `Interface` for the `User`
+
+```bsh
+$ ng g i shared/interfaces/user
+```
+
+`/src/app/shared/interfaces/user.ts`
+
+```typescript
+export interface User {
+  _id: string;
+  email: string;
+  password: string;
+  name: string;
+  role: 'admin' | 'user';
+  token: string;
+}
+```
