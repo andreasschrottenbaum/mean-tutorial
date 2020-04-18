@@ -236,3 +236,11 @@ main {
 ```
 
 Now, the very basic structure of our app is finished. Wasn‘t that hard, don‘t you think?
+
+## The Services
+
+Before we add the services, we generate the LoginComponent, where most of them are used
+
+```bsh
+$ ng g c login
+```
