@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" class="loginForm">
+<form [formGroup]="loginForm" (submit)="auth.login(loginForm.value)" class="loginForm">
   <p>
     <mat-form-field>
       <input matInput type="email" formControlName="email" placeholder="E-Mail">
@@ -11,6 +11,9 @@
   </p>
 
   <button mat-raised-button [disabled]="!loginForm.valid" color="primary">
+    <span *ngIf="auth.status==='processing'">
+      ...
+    </span>
     Login
   </button>
 </form>

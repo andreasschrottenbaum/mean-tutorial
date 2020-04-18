@@ -499,3 +499,35 @@ export class AuthService {
   }
 }
 ```
+
+For further development, we need to implement the service in the `loginComponent`
+
+`/src/app/login/login.component.ts`
+
+```diff
++ import { AuthService } from '../shared/services/auth.service';
+
+- private fb: FormBuilder
++ private fb: FormBuilder,
++ public auth: AuthService
+```
+
+To access it, we can use the `submit` call of our form. So, we need to update our template:
+
+`/src/app/login/login.component.html`
+
+```diff
+- <form [formGroup]="loginForm" class="loginForm">
++ <form [formGroup]="loginForm" (submit)="auth.login(loginForm.value)" class="loginForm">
+...
+- <button mat-raised-button [disabled]="!loginForm.valid" color="primary">
+-   Login
+- </button>
+
++ <button mat-raised-button [disabled]="!loginForm.valid" color="primary">
++   <span *ngIf="auth.status==='processing'">
++     ...
++   </span>
++   Login
++ </button>
+```
