@@ -558,3 +558,65 @@ If no user is logged in, we show a link to the login page.
 
 <a [routerLink]="['/login']" *ngIf="!auth.user">Login</a>
 ```
+
+## Next Service: `NotificationService`
+
+This service is responsible for displaying notifications at the bottom of the screen. It has just one `add()` method.
+
+```bsh
+$ ng g s shared/services/notification
+```
+
+`/src/app/shared/services/notification.service.ts`
+
+```typescript
+import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+interface Notification {
+  message: string;
+  status?: 'success' | 'warn' | 'primary' | 'accent';
+  duration?: number;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NotificationService {
+  constructor(
+    private snackBar: MatSnackBar
+  ) { }
+
+  add = (notification: Notification) => {
+    this.snackBar.open(
+      notification.message,
+      '×',
+      {
+        duration: notification.duration || 4000,
+        panelClass: ['mat-toolbar', `mat-${notification.status}`]
+      }
+    );
+  }
+}
+```
+
+### Implement the service
+
+We can use the `NotificationService` to tell the user, if the credentials are incorrect:
+
+`/src/app/login/login.component.ts`
+
+```diff
++ import { NotificationService } from './notification.service';
+...
+- private router: Router
++ private router: Router,
++ private notification: NotificationService
+...
+- console.log('incorrect password');
+- // TBD: Handle incorrect password
++ this.notification.add({
++   message: 'Incorrect username or password!',
++   status: 'warn'
++ });
+```

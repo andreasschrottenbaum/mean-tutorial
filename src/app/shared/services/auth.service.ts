@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { User } from '../interfaces/user';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthService {
 
   constructor(
     private router: Router,
+    private notification: NotificationService
   ) {
     // We store the user information in the local storage
     this.currentUser = JSON.parse(localStorage.getItem('user'));
@@ -45,8 +47,10 @@ export class AuthService {
       this.router.navigate(['/']);
     } else {
       this.status = 'idle';
-      console.log('incorrect password');
-      // TBD: Handle incorrect password
+      this.notification.add({
+        message: 'Incorrect username or password!',
+        status: 'warn'
+      });
     }
   }
 
