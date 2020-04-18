@@ -286,3 +286,32 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class AppModule { }
 ```
+
+Now, we prepare a simple login form in the `LoginComponent` with just two required fields: `email` and `password`.
+
+`/src/app/login/login.component.ts`
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required]]
+    });
+  }
+}
+```
