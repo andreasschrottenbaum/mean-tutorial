@@ -375,3 +375,14 @@ The markup is pretty straightforward. We will look into the features of the `For
   </button>
 </form>
 ```
+
+## The first service: `AuthService`
+
+The `AuthService` is responsible for the user status. It contains all neccessary informations about the current user.
+
+We generate it as used with the `ng` command and place the service in the `/src/app/shared/services` folder.
+
+```bsh
+$ ng g s shared/services/auth
+```
+
