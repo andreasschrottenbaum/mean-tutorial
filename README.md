@@ -239,8 +239,31 @@ Now, the very basic structure of our app is finished. Wasn‘t that hard, don‘
 
 ## The Services
 
-Before we add the services, we generate the LoginComponent, where most of them are used
+Before we add the services, we generate the `LoginComponent`, where most of them are used:
 
 ```bsh
 $ ng g c login
+```
+
+Let's add a quick and dirty route `/login` for the `LoginComponent`, just for development. We will get to a better way of handling routing in the next chapter.
+
+`/src/app/app-routing.module.ts`
+
+```typescript
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+
+const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
 ```
