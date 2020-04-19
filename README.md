@@ -620,3 +620,69 @@ We can use the `NotificationService` to tell the user, if the credentials are in
 +   status: 'warn'
 + });
 ```
+
+## Next Up: The `HeadlineService`
+
+This service sets the page title and the description in the template. As well as the `window.title`.
+
+```bsh
+$ ng g s shared/services/headline
+```
+
+`/src/app/shared/services/headline.service.ts`
+
+```typescript
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HeadlineService {
+  private currentTitle = '';
+  private currentDescription = '';
+
+  get title() {
+    return this.currentTitle;
+  }
+  set title(title: string) {
+    this.currentTitle = title;
+    this.currentDescription = null;
+
+    if (title) {
+      document.title = `${title} | MEAN Auth Tutorial`;
+    } else {
+      document.title = 'MEAN Auth Tutorial';
+    }
+  }
+
+  get description() {
+    return this.currentDescription;
+  }
+  set description(description: string) {
+    this.currentDescription = description;
+  }
+}
+```
+
+Next, we need to implement the service in the `AppComponent` and its template:
+
+`/src/app/app.component.ts`
+
+```diff
++ import { HeadlineService } from './shared/services/headline.service';
+
+- private router: Router
++ private router: Router,
++ public headline: HeadlineService
+```
+
+`/src/app/app.component.html`
+
+```diff
+- <div>Headline</div>
++ <div>{{ headline.title }}</div>
+- <div class="description">Description</div>
++ <div class="description">{{ headline.description }}</div>
+```
+
+For now, there is no output. We will come back to this feature later, when we implement the routing.

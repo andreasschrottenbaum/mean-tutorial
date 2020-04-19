@@ -5,6 +5,7 @@ import { Router, Event, NavigationEnd } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { HeadlineService } from './shared/services/headline.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private router: Router
+    private router: Router,
+    public headline: HeadlineService
   ) {
     // Close the navigation drawer on handsets after router change
     this.router.events.subscribe((event: Event) => {
