@@ -1,0 +1,9 @@
+<h3 mat-dialog-title *ngIf="headline">{{ headline }}</h3>
+
+<mat-dialog-content>
+  {{ message }}
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>{{ decline }}</button>
+  <button mat-raised-button color="primary" (click)="close()">{{ accept }}</button>
+</mat-dialog-actions>

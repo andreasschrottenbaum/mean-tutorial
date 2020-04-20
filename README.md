@@ -686,3 +686,99 @@ Next, we need to implement the service in the `AppComponent` and its template:
 ```
 
 For now, there is no output. We will come back to this feature later, when we implement the routing.
+
+## The `ConfirmationService`
+
+The `ConfirmationService` displays a dialog with two buttons. Per default it is `Cancel` and `OK`, but it can be individualized.
+
+The service needs a component, so we create it first:
+
+```bsh
+$ ng g c confirm-dialog
+```
+
+`/src/app/confirm-dialog/confirm-dialog.component.ts`
+
+```typescript
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+@Component({
+  selector: 'app-confirm-dialog',
+  templateUrl: './confirm-dialog.component.html',
+  styleUrls: ['./confirm-dialog.component.scss']
+})
+export class ConfirmDialogComponent {
+  headline: string;
+  message: string;
+  decline = 'Cancel';
+  accept = 'OK';
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<ConfirmDialogComponent>
+  ) {
+    this.headline = data.headline;
+    this.message = data.message;
+
+    if (data.decline) {
+      this.decline = data.decline;
+    }
+
+    if (data.accept) {
+      this.accept = data.accept;
+    }
+  }
+
+  close() {
+    this.dialogRef.close({
+      status: 'confirmed'
+    });
+  }
+}
+```
+
+`/src/app/confirm-dialog/confirm-dialog.component.html`
+
+```html
+<h3 mat-dialog-title *ngIf="headline">{{ headline }}</h3>
+
+<mat-dialog-content>
+  {{ message }}
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>{{ decline }}</button>
+  <button mat-raised-button color="primary" (click)="close()">{{ accept }}</button>
+</mat-dialog-actions>
+```
+
+And finally the service itself.
+
+```bsh
+$ ng g s shared/services/confirm
+```
+
+It sends the informations for `message`, `headline`, `decline` and `accept`. The latest three are optional.
+
+`/src/app/shared/services/confirm.service.ts`
+
+```typescript
+import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.component';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ConfirmService {
+  constructor(
+    private dialog: MatDialog
+  ) { }
+
+  ask(question, headline?, decline?, accept?) {
+    return this.dialog.open(ConfirmDialogComponent, { data: { message: question, headline, decline, accept } });
+  }
+}
+```
+
+We don't use this service yet, but it is pretty handy and will be used throughout this course.
