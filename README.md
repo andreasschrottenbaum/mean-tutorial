@@ -798,6 +798,8 @@ export const environment = {
 };
 ```
 
+> ## The backend server is covered in antoher [tutorial](//TBD:insert_link). You can also just clone the [repository](//TBD:insert_link).
+
 Also, we need to activate the `HttpClientModule`.
 
 `/src/app/app.module.ts`
