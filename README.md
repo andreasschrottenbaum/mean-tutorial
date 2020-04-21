@@ -927,3 +927,6 @@ $ ng g c blog
 $ ng g c navigation
 $ ng g c user-profile
 ```
+
+> Hint: You can remove the `LoginComponent` now, if, you want.
+
