@@ -912,3 +912,18 @@ export class ApiService {
   }
 }
 ```
+
+# The Routing
+
+We configure the routing outside the `AppRoutingModule` for better maintenance and reusability.
+
+But first of all, we create all components, we will use throughout this tutorial.
+
+```shell
+$ ng g c admin/users
+$ ng g c auth/login
+$ ng g c auth/logout
+$ ng g c blog
+$ ng g c navigation
+$ ng g c user-profile
+```
