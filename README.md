@@ -10,7 +10,7 @@
 
 If not done already, install `@angular/cli` globally:
 
-```bsh
+```shell
 $ npm i -g @angular/cli
 ```
 
@@ -18,7 +18,7 @@ Now we can access the `ng` command on the command line. We need it for seting up
 
 ### Intialize the Project
 
-```bsh
+```shell
 $ ng new my-project
 ```
 Answer the questions as follows:
@@ -28,7 +28,7 @@ Answer the questions as follows:
 
 ### Add Angular Material
 We add Angular Material for an easier structuring and styling of our HTML markup.
-```bsh
+```shell
 $ ng add @angular/material
 ```
 - Choose your preferred theme
@@ -41,7 +41,7 @@ Because we need to import every module for its own, it can bloat up the `AppModu
 
 The --flat flag creates the module in the `/src/app/modules` folder, instead of creating a subfolder for just one file.
 
-```bsh
+```shell
 $ ng g m material –flat
 ```
 
@@ -241,7 +241,7 @@ Now, the very basic structure of our app is finished. Wasn‘t that hard, don‘
 
 Before we add the services, we generate the `LoginComponent`, where most of them are used:
 
-```bsh
+```shell
 $ ng g c login
 ```
 
@@ -384,13 +384,13 @@ The `AuthService` is responsible for the user status. It contains all neccessary
 
 We generate it as used with the `ng` command and place the service in the `/src/app/shared/services` folder.
 
-```bsh
+```shell
 $ ng g s shared/services/auth
 ```
 
 We also generate an `Interface` for the `User`
 
-```bsh
+```shell
 $ ng g i shared/interfaces/user
 ```
 
@@ -409,7 +409,7 @@ export interface User {
 
 Also, we will need another component, just for checking the login and have a redirect
 
-```bsh
+```shell
 $ ng g c dashboard
 ```
 
@@ -563,7 +563,7 @@ If no user is logged in, we show a link to the login page.
 
 This service is responsible for displaying notifications at the bottom of the screen. It has just one `add()` method.
 
-```bsh
+```shell
 $ ng g s shared/services/notification
 ```
 
@@ -625,7 +625,7 @@ We can use the `NotificationService` to tell the user, if the credentials are in
 
 This service sets the page title and the description in the template. As well as the `window.title`.
 
-```bsh
+```shell
 $ ng g s shared/services/headline
 ```
 
@@ -693,7 +693,7 @@ The `ConfirmationService` displays a dialog with two buttons. Per default it is 
 
 The service needs a component, so we create it first:
 
-```bsh
+```shell
 $ ng g c confirm-dialog
 ```
 
@@ -754,7 +754,7 @@ export class ConfirmDialogComponent {
 
 And finally the service itself.
 
-```bsh
+```shell
 $ ng g s shared/services/confirm
 ```
 
@@ -812,7 +812,7 @@ Also, we need to activate the `HttpClientModule`.
 + HttpClientModule
 ```
 
-```bsh
+```shell
 $ ng g s shared/services/api
 ```
 
